@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>录入信息</title>
+</head>
+<body>
+<form method="post">
+    <div>
+        <!-- 输入框 -->
+        <div align="left">
+            <input type="text" placeholder="输入姓名" name="studentName"/><br>
+            <input type="text" placeholder="输入18位身份证号" name="studentNum"/><br>
+
+            <span style="color: red">{{ msg }}</span><br>
+            <!-- name的值可以用于后端重定向，value是按钮的名称 -->
+            <input type="submit" name="up" value="返回首页"/>
+            <input type="submit" name="down" value="下一步" style="margin-left:30px;"/>
+
+            {% if base %}
+                <script >
+                    if (confirm("身份证号码{{ studentNum }}已存在！"+'\n'+'请确认你的姓名是否是"{{ studentName }}"'+'\n'+'"确认"继续'+'\n'+'"取消"返回当前页')) {
+                        window.location.href = "http://127.0.0.1:5000/student/upload_pic/?name={{ studentName }}"
+                    } else {
+
+                        window.location.href = "http://127.0.0.1:5000/student/register/"
+                    }
+                </script>
+            {% endif %}
+
+        </div>
+    </div>
+</form>
+</body>
+</html>

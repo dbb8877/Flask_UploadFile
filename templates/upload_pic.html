@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传</title>
+</head>
+<body>
+<h3>
+    你好,{{ studentname }}请上传本人照片。
+</h3>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+         {{ message }}.
+    </div><br>
+{% endfor %}
+<form method="post" enctype="multipart/form-data">
+    <label> 图片上传：</label> <input type="file" name="photo"/>
+    <input type="submit" value="图片上传"/>*上传照片必须小于2M<br>
+    {% if base %}
+        <script>
+            if (confirm("已经上传过照片" + "\n" + "'确认'返回首页" + "\n" + "'取消返回当前页面'")) {
+                <!-- 允许上传怎么写？:点击确定就能上传 -->
+                window.location.href = "http://127.0.0.1:5000/student/home/"
+            } else {
+                <!-- 如果还需要弹出对话框，需要继续添加  confirm();  -->
+                window.location.href = "http://127.0.0.1:5000/student/upload_pic/?name={{ studentname }}"
+            }
+
+        </script>
+    {% endif %}
+</form>
+</body>
+</html>
